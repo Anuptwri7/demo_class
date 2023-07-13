@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constants/apiConstant.dart';
 import '../constants/styleConstant.dart';
+import '../pages/homePage.dart';
 import 'branch/model/branchModel.dart';
 import 'branch/services/branchApi.dart';
 
@@ -268,15 +269,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         )),
                     kHeightMedium,
                     kHeightVeryBigForForm,
-
-                    Padding(
-                      padding:
-                      const EdgeInsets.only(left: 30, bottom: 0, top: 0),
-                      child: Text(
-                        "Version 1.101 Developed by Soori Solutions",
-                        style: TextStyle(fontSize: 12, color: Colors.black),
-                      ),
-                    ),
                   ],
                 ),
               ),
@@ -288,7 +280,9 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<void> login() async {
-
+String accessToken ;
+String userName ;
+  SharedPreferences prefs = await SharedPreferences.getInstance();
     var response = await http.post(
       Uri.parse('${StringConst.protocol}${subDomain}/api/v1/user-app/login'),
       body: ({
@@ -296,10 +290,15 @@ class _LoginScreenState extends State<LoginScreen> {
         'password': password,
       }),
     );
-
-    log(response.body.toString());
     if (response.statusCode == 200) {
-    log("success ");
+   setState(() {
+     accessToken = jsonDecode(response.body)['tokens']['access'];
+     userName =  jsonDecode(response.body)['userName'];
+  prefs.setString("accessToken", accessToken);
+  prefs.setString("userName",userName);
+   });
+   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomePage()));
+
     } else {
     }
   }
