@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:demo_class/auth/authCheckPage.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -40,7 +41,11 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Column(
         children: [
-
+          ElevatedButton(onPressed: ()async{
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+            prefs.clear();
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>AuthCheckPage()));
+          }, child: Text("Logout"))
         ],
       ),
     );

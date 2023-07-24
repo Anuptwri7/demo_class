@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:demo_class/auth/authCheckPage.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -290,6 +291,7 @@ String userName ;
         'password': password,
       }),
     );
+log(response.body);
     if (response.statusCode == 200) {
    setState(() {
      accessToken = jsonDecode(response.body)['tokens']['access'];
@@ -297,7 +299,7 @@ String userName ;
   prefs.setString("accessToken", accessToken);
   prefs.setString("userName",userName);
    });
-   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomePage()));
+   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>AuthCheckPage()));
 
     } else {
     }
