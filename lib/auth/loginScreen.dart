@@ -61,10 +61,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   children: [
-                    // Image.asset(
-                      // "assets/logo/cubixLogo.png",
-                      // height: 60,
-                    // ),
                     Padding(
                       padding: const EdgeInsets.only(top: 10, left: 10),
                       child: Row(
@@ -73,7 +69,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             'Login Text',
                             style: TextStyle(fontSize: 20, color: Colors.black),
                           ),
-
                         ],
                       ),
                     ),
@@ -285,7 +280,7 @@ String accessToken ;
 String userName ;
   SharedPreferences prefs = await SharedPreferences.getInstance();
     var response = await http.post(
-      Uri.parse('${StringConst.protocol}${subDomain}/api/v1/user-app/login'),
+      Uri.parse('https://api-vienna.poojanpradhan.com.np/api/v1/user-app/login'),
       body: ({
         'userName': username,
         'password': password,

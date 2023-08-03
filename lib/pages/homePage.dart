@@ -13,15 +13,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String? userName ;
-
-
   Future getUserName()async{
     SharedPreferences prefs =await SharedPreferences.getInstance();
    setState(() {
      userName= prefs.getString("userName");
    });
   }
-
 
   @override
   void initState() {
@@ -41,6 +38,34 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Column(
         children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Visibility(
+                  visible:userName=='daman'?true:false,
+                  child: Container(
+                    height: 150,
+                    width: MediaQuery.of(context).size.width/3,
+                    color: Colors.blue,
+                    child: Center(child: Text("Box 1",style: TextStyle(color: Colors.white))),
+                  ),
+                ),
+                Visibility(
+                  visible:userName=='anup'?true:false,
+                  child: Container(
+                    height: 150,
+                    width: MediaQuery.of(context).size.width/3,
+                    color: Colors.red,
+                    child: Center(child: Text("Box 2",style: TextStyle(color: Colors.white),)),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Text("${userName=="daman"?"the name is ${userName}":"The name is not daman"}"),
           ElevatedButton(onPressed: ()async{
             SharedPreferences prefs = await SharedPreferences.getInstance();
             prefs.clear();

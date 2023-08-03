@@ -5,6 +5,8 @@ import 'package:demo_class/pages/homePage.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../pages/stock_anaysis.dart';
+
 class AuthCheckPage extends StatefulWidget {
   const AuthCheckPage({Key? key}) : super(key: key);
 
@@ -27,7 +29,7 @@ class _AuthCheckPageState extends State<AuthCheckPage> {
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
     }else{
       log("token has"+token.toString());
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomePage()));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>StockAnalysisPage()));
 
     }
 
